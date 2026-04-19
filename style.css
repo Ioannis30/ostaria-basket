@@ -33,4 +33,9 @@ tr:nth-child(even) {
   padding: 10px;
   border-radius: 8px;
 }
+
+tr b {
+  color: #22c55e;
+}
+
 ```
