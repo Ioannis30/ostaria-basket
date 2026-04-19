@@ -2,17 +2,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>League Hub</title>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🏀 League Central</h1>
+<div class="header">
+  <div class="logo">🏀 League</div>
   <nav>
     <a href="standings.html">Standings</a>
-    <a href="schedule.html">Schedule</a>
+    <a href="schedule.html">Scores</a>
     <a href="playoffs.html">Playoffs</a>
   </nav>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h2>Bienvenue</h2>
+    <p>Ligue dynamique type ESPN</p>
+  </div>
+</div>
+</body>
+</html>
+```
+
+---
+# 📊 standings.html
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="header"><div class="logo">Standings</div></div>
+<div class="container">
+  <div class="card">
+    <table class="table" id="table"></table>
+  </div>
+</div>
+<script src="js/standings.js"></script>
 </body>
 </html>
 ```
