@@ -1,0 +1,6 @@
+```json
+[
+  {"home":"Team A","away":"Team B","homeScore":100,"awayScore":90},
+  {"home":"Team C","away":"Team D","homeScore":95,"awayScore":99}
+]
+```
