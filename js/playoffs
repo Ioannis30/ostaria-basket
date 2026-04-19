@@ -1,47 +1,61 @@
 ```javascript
+Promise.all([
+  fetch("data/results.json").then(r => r.json()),
+  fetch("data/teams.json").then(r => r.json()),
+  fetch("data/playoffResults.json").then(r => r.json())
+])
+.then(([results, teams, series]) => {
+
+  let table = {};
+
+  teams.forEach(t => {
+    table[t.name] = {w:0,l:0,conference:t.conference};
+  });
+
+  results.forEach(g => {
+    if (g.homeScore > g.awayScore) {
+      table[g.home].w++;
+      table[g.away].l++;
+    } else {
+      table[g.away].w++;
+      table[g.home].l++;
+    }
+  });
+
+  let ranking = Object.entries(table).map(([team, stats]) => {
+    let games = stats.w + stats.l;
     let pct = games ? stats.w / games : 0;
     return {team, ...stats, pct};
   });
 
-  // Séparer conférences
-  let east = ranking.filter(t => t.conference === "East").sort((a,b)=>b.pct-a.pct);
-  let west = ranking.filter(t => t.conference === "West").sort((a,b)=>b.pct-a.pct);
+  let east = ranking.filter(t => t.conference === "East").sort((a,b)=>b.pct-a.pct).slice(0,4);
+  let west = ranking.filter(t => t.conference === "West").sort((a,b)=>b.pct-a.pct).slice(0,4);
 
-  // Top 4 de chaque conférence
-  east = east.slice(0,4);
-  west = west.slice(0,4);
+  function findSeries(t1, t2) {
+    return series.find(s =>
+      (s.team1 === t1 && s.team2 === t2) ||
+      (s.team1 === t2 && s.team2 === t1)
+    );
+  }
+
+  function getWinner(s) {
+    return s.wins1 > s.wins2 ? s.team1 : s.team2;
+  }
 
   function renderConference(divId, teams) {
     const div = document.getElementById(divId);
 
-    let round1 = document.createElement("div");
-    round1.className = "round";
+    let s1 = findSeries(teams[0].team, teams[3].team);
+    let s2 = findSeries(teams[1].team, teams[2].team);
 
-    // Demi-finales conférence
-    round1.innerHTML += `<div class="match">${teams[0].team} vs ${teams[3].team}</div>`;
-    round1.innerHTML += `<div class="match">${teams[1].team} vs ${teams[2].team}</div>`;
+    let w1 = s1 ? getWinner(s1) : "?";
+    let w2 = s2 ? getWinner(s2) : "?";
 
-    let round2 = document.createElement("div");
-    round2.className = "round";
-
-    // Final conférence (placeholder winners)
-    round2.innerHTML += `<div class="match">Winner SF1 vs Winner SF2</div>`;
-
-    div.appendChild(round1);
-    div.appendChild(round2);
-
-    return teams[0].team; // seed1 placeholder champion
-  }
-
-  let eastWinner = renderConference("east", east);
-  let westWinner = renderConference("west", west);
-
-  // Finale NBA
-  const finalDiv = document.getElementById("final");
-  finalDiv.innerHTML = `
-    <div class="match">
-      ${eastWinner} vs ${westWinner}
-    </div>
-  `;
-});
-```
+    div.innerHTML = `
+      <div class="round">
+        <div class="match">${teams[0].team} (${s1?.wins1||0}) vs ${teams[3].team} (${s1?.wins2||0})</div>
+        <div class="match">${teams[1].team} (${s2?.wins1||0}) vs ${teams[2].team} (${s2?.wins2||0})</div>
+      </div>
+      <div class="round">
+        <div class="match">${w1} vs ${w2}</div>
+      </div>
