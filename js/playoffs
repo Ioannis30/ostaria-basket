@@ -1,7 +1,4 @@
 ```javascript
-
-  let ranking = Object.entries(table).map(([team, stats]) => {
-    let games = stats.w + stats.l;
     let pct = games ? stats.w / games : 0;
     return {team, ...stats, pct};
   });
