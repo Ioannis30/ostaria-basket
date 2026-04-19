@@ -1,4 +1,3 @@
-```javascript
 Promise.all([
   fetch("data/results.json").then(r => r.json()),
   fetch("data/teams.json").then(r => r.json()),
