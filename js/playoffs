@@ -1,0 +1,35 @@
+```javascript
+fetch("data/results.json")
+  .then(r => r.json())
+  .then(results => {
+
+    let table = {};
+
+    results.forEach(g => {
+      if (!table[g.home]) table[g.home] = {w:0,l:0};
+      if (!table[g.away]) table[g.away] = {w:0,l:0};
+
+      if (g.homeScore > g.awayScore) {
+        table[g.home].w++;
+        table[g.away].l++;
+      } else {
+        table[g.away].w++;
+        table[g.home].l++;
+      }
+    });
+
+    let ranked = Object.entries(table)
+      .sort((a,b) => b[1].w - a[1].w)
+      .map(t => t[0]);
+
+    let top8 = ranked.slice(0,8);
+
+    const bracket = document.getElementById("bracket");
+
+    for (let i=0;i<8;i+=2) {
+      bracket.innerHTML += `<div class="match">
+        ${top8[i]}<br>vs<br>${top8[i+1]}
+      </div>`;
+    }
+  });
+```
