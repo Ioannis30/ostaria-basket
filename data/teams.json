@@ -1,0 +1,11 @@
+```json
+[
+  {"name":"Paris Lions","conference":"East","division":"Atlantic"},
+  {"name":"Lyon Tigers","conference":"East","division":"Atlantic"},
+  {"name":"Marseille Sharks","conference":"East","division":"Central"},
+  {"name":"Lille Bears","conference":"East","division":"Central"},
+
+  {"name":"Berlin Wolves","conference":"West","division":"North"},
+  {"name":"Madrid Kings","conference":"West","division":"South"}
+]
+```
