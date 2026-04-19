@@ -1,4 +1,3 @@
-```javascript
 fetch("data/results.json")
 .then(r=>r.json())
 .then(data=>{
@@ -12,4 +11,3 @@ fetch("data/results.json")
    </div>`;
  });
 });
-```
