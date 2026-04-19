@@ -1,0 +1,36 @@
+```css
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+td, th {
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background: #1e293b;
+}
+
+#games p {
+  background: #1e293b;
+  padding: 10px;
+  margin: 10px auto;
+  width: 50%;
+  border-radius: 8px;
+}
+
+#bracket {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.match {
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 8px;
+}
+```
