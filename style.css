@@ -38,4 +38,24 @@ tr b {
   color: #22c55e;
 }
 
+.bracket {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.match {
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 120px;
+}
+
 ```
